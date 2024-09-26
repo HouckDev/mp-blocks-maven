@@ -998,10 +998,10 @@ public class TestBlockEquiv {
         assertTrue(AsciiBlock.equal(blocksB[i], blocksA[i]),
           String.format("*: equal(exes%s%db, exes%s%da)",
               type, i, type, i));
-        assertTrue(blocksA[i].eqv(blocksB[i]),
+        assertTrue(AsciiBlock.eqv(blocksA[i], blocksB[i]),
           String.format("M: eqv(exes%s%da, exes%s%db)",
               type, i, type, i));
-        assertTrue(blocksB[i].eqv(blocksA[i]),
+        assertTrue(AsciiBlock.eqv(blocksB[i], blocksA[i]),
           String.format("M: eqv(exes%s%db, exes%s%da)",
               type, i, type, i));
       } // if
@@ -1027,10 +1027,10 @@ public class TestBlockEquiv {
         assertTrue(AsciiBlock.equal(blocks[j], blocks[i]),
           String.format("*: equal(exes%s%da, exes%s%da)",
               type, j, type, i));
-        assertFalse(blocks[i].eqv(blocks[j]),
+        assertFalse(AsciiBlock.eqv(blocks[i], blocks[j]),
           String.format("M: eqv(exes%s%da, exes%s%da)",
               type, i, type, j));
-        assertFalse(blocks[j].eqv(blocks[i]),
+        assertFalse(AsciiBlock.eqv(blocks[j], blocks[i]),
           String.format("M: eqv(exes%s%da, exes%s%da)",
               type, j, type, i));
       } // for j
