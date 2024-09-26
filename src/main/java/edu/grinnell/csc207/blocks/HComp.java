@@ -30,15 +30,11 @@ public class HComp implements AsciiBlock {
   /**
    * Build a horizontal composition of two blocks.
    *
-   * @param alignment
-   *   The way in which the blocks should be aligned.
-   * @param leftBlock
-   *   The block on the left.
-   * @param rightBlock
-   *   The block on the right.
+   * @param alignment The way in which the blocks should be aligned.
+   * @param leftBlock The block on the left.
+   * @param rightBlock The block on the right.
    */
-  public HComp(VAlignment alignment, AsciiBlock leftBlock,
-      AsciiBlock rightBlock) {
+  public HComp(VAlignment alignment, AsciiBlock leftBlock, AsciiBlock rightBlock) {
     this.align = alignment;
     this.blocks = new AsciiBlock[] {leftBlock, rightBlock};
   } // HComp(VAlignment, AsciiBlock, AsciiBlock)
@@ -46,10 +42,8 @@ public class HComp implements AsciiBlock {
   /**
    * Build a horizontal composition of multiple blocks.
    *
-   * @param alignment
-   *   The alignment of the blocks.
-   * @param blocksToCompose
-   *   The blocks we will be composing.
+   * @param alignment The alignment of the blocks.
+   * @param blocksToCompose The blocks we will be composing.
    */
   public HComp(VAlignment alignment, AsciiBlock[] blocksToCompose) {
     this.align = alignment;
@@ -67,18 +61,17 @@ public class HComp implements AsciiBlock {
    *
    * @return row i.
    *
-   * @exception Exception
-   *   if i is outside the range of valid rows.
+   * @exception Exception if i is outside the range of valid rows.
    */
   public String row(int i) throws Exception {
     if ((i >= 0) && (i <= this.height())) {
       // Stuff within the box
       String constructedString = "";
-      for (AsciiBlock block: this.blocks) {
+      for (AsciiBlock block : this.blocks) {
         int iOffset = i;
         switch (this.align) {
           case TOP:
-            
+
             break;
           case BOTTOM:
             iOffset = iOffset - (this.height() - block.height());
@@ -92,7 +85,7 @@ public class HComp implements AsciiBlock {
         if ((iOffset >= 0) && (iOffset < block.height())) {
           constructedString = constructedString + block.row(iOffset);
         } else {
-          constructedString = constructedString +  " ".repeat(block.width());
+          constructedString = constructedString + " ".repeat(block.width());
         }
       }
 
@@ -109,7 +102,7 @@ public class HComp implements AsciiBlock {
    */
   public int height() {
     int maxHeight = 0;
-    for (AsciiBlock block: this.blocks) {
+    for (AsciiBlock block : this.blocks) {
       maxHeight = Math.max(maxHeight, block.height());
     }
     return maxHeight;
@@ -122,7 +115,7 @@ public class HComp implements AsciiBlock {
    */
   public int width() {
     int totalWidth = 0;
-    for (AsciiBlock block: this.blocks) {
+    for (AsciiBlock block : this.blocks) {
       totalWidth = totalWidth + block.width();
     }
     return totalWidth;
@@ -131,11 +124,9 @@ public class HComp implements AsciiBlock {
   /**
    * Determine if another block is structurally equivalent to this block.
    *
-   * @param other
-   *   The block to compare to this block.
+   * @param other The block to compare to this block.
    *
-   * @return true if the two blocks are structurally equivalent and
-   *    false otherwise.
+   * @return true if the two blocks are structurally equivalent and false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
     return ((other instanceof HComp) && (this.eqv((HComp) other)));
@@ -144,18 +135,22 @@ public class HComp implements AsciiBlock {
   /**
    * Determine if another HComp is structurally equivalent to this block.
    *
-   * @param other
-   *   The block to compare to this block.
+   * @param other The block to compare to this block.
    *
-   * @return true if the two blocks are structurally equivalent and
-   *     false otherwise.
+   * @return true if the two blocks are structurally equivalent and false otherwise.
    */
   public boolean eqv(HComp other) {
-    if (this.align != other.align) {return false;}
-    if (this.blocks.length != other.blocks.length) {return false;}
+    if (this.align != other.align) {
+      return false;
+    } // if
+    if (this.blocks.length != other.blocks.length) {
+      return false;
+    } // if
     for (int z = 0; z < this.blocks.length; z++) {
-      if (!this.blocks[z].eqv(other.blocks[z])) {return false;}
-    }
+      if (!this.blocks[z].eqv(other.blocks[z])) {
+        return false;
+      } // if
+    } // for
     return true;
   } // eqv(HComp)
 } // class HComp

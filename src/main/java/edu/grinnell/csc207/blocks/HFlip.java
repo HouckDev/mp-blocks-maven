@@ -23,8 +23,7 @@ public class HFlip implements AsciiBlock {
   /**
    * Build a new block with the specified contents.
    *
-   * @param original
-   *   The original block.
+   * @param original The original block.
    */
   public HFlip(AsciiBlock original) {
     this.block = original;
@@ -41,8 +40,7 @@ public class HFlip implements AsciiBlock {
    *
    * @return row i.
    *
-   * @exception Exception
-   *   If the row is invalid.
+   * @exception Exception If the row is invalid.
    */
   public String row(int i) throws Exception {
     if ((i >= 0) && (i < this.height())) {
@@ -50,7 +48,7 @@ public class HFlip implements AsciiBlock {
       String constructedString = "";
       for (int z = 0; z < this.block.row(i).length(); z++) {
         constructedString = this.block.row(i).charAt(z) + constructedString;
-      }
+      } // for
       return constructedString;
     } else {
       throw new Exception("Invalid row " + i);
@@ -78,11 +76,9 @@ public class HFlip implements AsciiBlock {
   /**
    * Determine if another block is structurally equivalent to this block.
    *
-   * @param other
-   *   The block to compare to this block.
+   * @param other The block to compare to this block.
    *
-   * @return true if the two blocks are structurally equivalent and
-   *    false otherwise.
+   * @return true if the two blocks are structurally equivalent and false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
     return ((other instanceof HFlip) && (this.eqv((HFlip) other)));
@@ -91,11 +87,9 @@ public class HFlip implements AsciiBlock {
   /**
    * Determine if another HFlip is structurally equivalent to this block.
    *
-   * @param other
-   *   The block to compare to this block.
+   * @param other The block to compare to this block.
    *
-   * @return true if the two blocks are structurally equivalent and
-   *     false otherwise.
+   * @return true if the two blocks are structurally equivalent and false otherwise.
    */
   public boolean eqv(HFlip other) {
     return this.block.eqv(other.block);

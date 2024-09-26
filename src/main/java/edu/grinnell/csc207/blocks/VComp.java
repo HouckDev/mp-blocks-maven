@@ -31,15 +31,11 @@ public class VComp implements AsciiBlock {
   /**
    * Build a vertical composition of two blocks.
    *
-   * @param alignment
-   *   The way in which the blocks should be aligned.
-   * @param topBlock
-   *   The block on the top.
-   * @param bottomBlock
-   *   The block on the bottom.
+   * @param alignment The way in which the blocks should be aligned.
+   * @param topBlock The block on the top.
+   * @param bottomBlock The block on the bottom.
    */
-  public VComp(HAlignment alignment, AsciiBlock topBlock,
-      AsciiBlock bottomBlock) {
+  public VComp(HAlignment alignment, AsciiBlock topBlock, AsciiBlock bottomBlock) {
     this.align = alignment;
     this.blocks = new AsciiBlock[] {topBlock, bottomBlock};
   } // VComp(HAlignment, AsciiBlock, AsciiBlock)
@@ -47,10 +43,8 @@ public class VComp implements AsciiBlock {
   /**
    * Build a vertical composition of multiple blocks.
    *
-   * @param alignment
-   *   The alignment of the blocks.
-   * @param blocksToCompose
-   *   The blocks we will be composing.
+   * @param alignment The alignment of the blocks.
+   * @param blocksToCompose The blocks we will be composing.
    */
   public VComp(HAlignment alignment, AsciiBlock[] blocksToCompose) {
     this.align = alignment;
@@ -68,8 +62,7 @@ public class VComp implements AsciiBlock {
    *
    * @return row i.
    *
-   * @exception Exception
-   *   if i is outside the range of valid rows.
+   * @exception Exception if i is outside the range of valid rows.
    */
   public String row(int i) throws Exception {
     if ((i >= 0) && (i <= this.height())) {
@@ -77,19 +70,21 @@ public class VComp implements AsciiBlock {
       String constructedString = "";
       AsciiBlock block = null;
       int iOffset = 0;
-      for (int z = 0; z < this.blocks.length; z ++) {
+      for (int z = 0; z < this.blocks.length; z++) {
         if (iOffset + this.blocks[z].height() > i) {
           block = this.blocks[z];
           switch (this.align) {
             case LEFT:
               constructedString = block.row(i - iOffset) + " ".repeat(this.width() - block.width());
-              
+
               break;
             case RIGHT:
-             constructedString = " ".repeat(this.width() - block.width()) + block.row(i - iOffset);
+              constructedString = " ".repeat(this.width() - block.width()) + block.row(i - iOffset);
               break;
             case CENTER:
-              constructedString = " ".repeat((this.width() - block.width()) / 2) + block.row(i - iOffset) + " ".repeat(this.width() - ((this.width() - block.width()) / 2 + block.width()));
+              constructedString = " ".repeat((this.width() - block.width()) / 2)
+                  + block.row(i - iOffset)
+                  + " ".repeat(this.width() - ((this.width() - block.width()) / 2 + block.width()));
               break;
             default:
               break;
@@ -111,9 +106,9 @@ public class VComp implements AsciiBlock {
    */
   public int height() {
     int totalheight = 0;
-    for (AsciiBlock block: this.blocks) {
+    for (AsciiBlock block : this.blocks) {
       totalheight = totalheight + block.height();
-    }
+    } // for
     return totalheight;
   } // height()
 
@@ -124,20 +119,18 @@ public class VComp implements AsciiBlock {
    */
   public int width() {
     int maxWidth = 0;
-    for (AsciiBlock block: this.blocks) {
+    for (AsciiBlock block : this.blocks) {
       maxWidth = Math.max(maxWidth, block.width());
-    }
+    } // for
     return maxWidth;
   } // width()
 
   /**
    * Determine if another block is structurally equivalent to this block.
    *
-   * @param other
-   *   The block to compare to this block.
+   * @param other The block to compare to this block.
    *
-   * @return true if the two blocks are structurally equivalent and
-   *    false otherwise.
+   * @return true if the two blocks are structurally equivalent and false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
     return ((other instanceof VComp) && (this.eqv((VComp) other)));
@@ -146,18 +139,22 @@ public class VComp implements AsciiBlock {
   /**
    * Determine if another HComp is structurally equivalent to this block.
    *
-   * @param other
-   *   The block to compare to this block.
+   * @param other The block to compare to this block.
    *
-   * @return true if the two blocks are structurally equivalent and
-   *     false otherwise.
+   * @return true if the two blocks are structurally equivalent and false otherwise.
    */
   public boolean eqv(VComp other) {
-    if (this.align != other.align) {return false;}
-    if (this.blocks.length != other.blocks.length) {return false;}
+    if (this.align != other.align) {
+      return false;
+    } // if
+    if (this.blocks.length != other.blocks.length) {
+      return false;
+    } // if
     for (int z = 0; z < this.blocks.length; z++) {
-      if (!this.blocks[z].eqv(other.blocks[z])) {return false;}
-    }
+      if (!this.blocks[z].eqv(other.blocks[z])) {
+        return false;
+      } // if
+    } // for
     return true;
   } // eqv(VComp)
 } // class VComp
