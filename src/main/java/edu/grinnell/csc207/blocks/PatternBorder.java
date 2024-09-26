@@ -1,7 +1,7 @@
 package edu.grinnell.csc207.blocks;
 
 /**
- * A text block surrounded by a single letter.
+ * A text block surrounded by a pattern of letters.
  *
  * @author Paden Houck
  */
