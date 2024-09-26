@@ -16,9 +16,9 @@ public class PatternBorder implements AsciiBlock {
   AsciiBlock contents;
 
   /**
-   * The character we put around the box.
+   * The character pattern we put around the box.
    */
-  String surroundChar;
+  char[] pattern;
 
   // +--------------+------------------------------------------------------
   // | Constructors |
@@ -30,12 +30,12 @@ public class PatternBorder implements AsciiBlock {
    * @param blockContents
    *   The contents of the block.
    *
-   * @param theChar
-   *   The character that we use to surround the block.
+   * @param thePattern
+   *   The pattern that we use to surround the block.
    */
-  public PatternBorder(AsciiBlock blockContents, char theChar) {
+  public PatternBorder(AsciiBlock blockContents, char[] thePattern) {
     this.contents = blockContents;
-    this.surroundChar = Character.toString(theChar);
+    this.pattern = thePattern;
   } // Surrounded(AsciiBlock)
 
   // +---------+-----------------------------------------------------------
@@ -55,10 +55,14 @@ public class PatternBorder implements AsciiBlock {
   public String row(int i) throws Exception {
     if (i == 0 || i == this.height() - 1) {
       // The top of the box
-      return this.surroundChar.repeat(this.contents.width() + 2);
+      String constructedString = "";
+      for (int z = 0; z < this.width(); z ++) {
+        constructedString = constructedString + this.pattern[(z + i) % this.pattern.length];
+      }
+      return constructedString;
     } else if ((i > 0) && (i <= this.height())) {
       // Stuff within the box
-      return this.surroundChar + this.contents.row(i - 1) + this.surroundChar;
+      return this.pattern[(i) % this.pattern.length] + this.contents.row(i - 1) + this.pattern[(1 + this.contents.width() + i) % this.pattern.length];
     } else {
       throw new Exception("Invalid row " + i);
     } // if/else
