@@ -93,6 +93,9 @@ public class Surrounded implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false;       // STUB
+    if (!(other instanceof Surrounded)) {return false;}
+    if (((Surrounded) other).surroundChar.equals(this.surroundChar)) {return true;};
+    if (((Surrounded) other).contents.eqv(this.contents)) {return true;};
+    return false;
   } // eqv(AsciiBlock)
 } // class Surrounded
