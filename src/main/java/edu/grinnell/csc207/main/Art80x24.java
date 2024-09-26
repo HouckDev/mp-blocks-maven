@@ -25,7 +25,7 @@ public class Art80x24 {
   public static void main(String[] args) throws Exception {
     PrintWriter pen = new PrintWriter(System.out, true);
     AsciiBlock art = new Rect('^', 80, 24);
-    AsciiBlock art2 = new VComp(HAlignment.CENTER, AsciiBlock[] {});
+    AsciiBlock art2 = new VComp(HAlignment.CENTER, new AsciiBlock[] {});
     AsciiBlock.print(pen, art);
     AsciiBlock.print(pen, art2);
     pen.close();
