@@ -38,7 +38,6 @@ public class Art80x24 {
     } // for
     char[][] pseudos = new char[][] {pseudo, pseudo1, pseudo2};
     PrintWriter pen = new PrintWriter(System.out, true);
-    AsciiBlock art = new Rect('^', 80, 24);
     AsciiBlock art2 = new HComp(VAlignment.CENTER, new AsciiBlock[] {new Rect(' ', 3, 1),
         new Surrounded(new PatternBorder(new VComp(HAlignment.CENTER, new AsciiBlock[] {
             new Line("|\\   __  \\|\\   __  \\|\\   ___ \\|\\  ___ \\  |\\   ___  \\    "),
@@ -55,7 +54,6 @@ public class Art80x24 {
     for (int z = 0; z < 7; z++) {
       art2 = new PatternBorder(art2, pseudos[(int) Math.floor(Math.random() * pseudos.length)]);
     } // for
-    AsciiBlock.print(pen, art);
     AsciiBlock.print(pen, art2);
     pen.close();
   } // main(String[])
