@@ -72,7 +72,36 @@ public class VComp implements AsciiBlock {
    *   if i is outside the range of valid rows.
    */
   public String row(int i) throws Exception {
-    return "";  // STUB
+    if ((i >= 0) && (i <= this.height())) {
+      // Stuff within the box
+      String constructedString = "";
+      AsciiBlock block = null;
+      int iOffset = 0;
+      for (int z = 0; z < this.blocks.length; z ++) {
+        if (iOffset + this.blocks[z].height() > i) {
+          block = this.blocks[z];
+          switch (this.align) {
+            case LEFT:
+              constructedString = block.row(i - iOffset) + " ".repeat(this.width() - block.width());
+              
+              break;
+            case RIGHT:
+             constructedString = " ".repeat(this.width() - block.width()) + block.row(i - iOffset);
+              break;
+            case CENTER:
+              constructedString = " ".repeat((this.width() - block.width()) / 2) + block.row(i - iOffset) + " ".repeat(this.width() - ((this.width() - block.width()) / 2 + block.width()));
+              break;
+            default:
+              break;
+          } // switch
+          return constructedString;
+        } // if
+        iOffset = iOffset + this.blocks[z].height();
+      } // for
+      throw new Exception("Invalid block " + i);
+    } else {
+      throw new Exception("Invalid row " + i);
+    } // if/else
   } // row(int)
 
   /**
@@ -81,7 +110,11 @@ public class VComp implements AsciiBlock {
    * @return the number of rows
    */
   public int height() {
-    return 0;   // STUB
+    int totalheight = 0;
+    for (AsciiBlock block: this.blocks) {
+      totalheight = totalheight + block.height();
+    }
+    return totalheight;
   } // height()
 
   /**
@@ -90,7 +123,11 @@ public class VComp implements AsciiBlock {
    * @return the number of columns
    */
   public int width() {
-    return 0;   // STUB
+    int maxWidth = 0;
+    for (AsciiBlock block: this.blocks) {
+      maxWidth = Math.max(maxWidth, block.width());
+    }
+    return maxWidth;
   } // width()
 
   /**
