@@ -9,7 +9,7 @@ Explorations with the creation, composition, and mutation of blocks of ASCII tex
 
 **Notes for the reader**
 
-PLEASE ADD NOTES FOR SOMEONE NOT FAMILIAR WITH THE PROJECT.
+Project containing classes for AsciiBlocks to created nested depictions in Ascii text
 
 ---
 
