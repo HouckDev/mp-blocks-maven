@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 
 /**
  * Create and print an amazing 80x24 ASCII artwork.
+ * Prints first name in large ascii art, surrounding by patter made by last name, which is then surrounding by a sea of psuedo random characters.
  *
  * @author Paden Houck
  */
@@ -25,24 +26,32 @@ public class Art80x24 {
    * @exception Exception If something goes wrong with one of the underlying classes.
    */
   public static void main(String[] args) throws Exception {
+    char[] pseudo = new char[100];
+    char[] pseudo1 = new char[100];
+    char[] pseudo2 = new char[100];
+    char[] pseudoroot = new char[] {'@', '#', '%', '$', '&', '*'};
+    for (int z = 0; z < 100; z++) {
+      pseudo[z] = pseudoroot[(int) Math.floor(Math.random() * pseudoroot.length)];
+      pseudo1[z] = pseudoroot[(int) Math.floor(Math.random() * pseudoroot.length)];
+      pseudo2[z] = pseudoroot[(int) Math.floor(Math.random() * pseudoroot.length)];
+    }
+    char[][] pseudos = new char[][] {pseudo,pseudo1,pseudo2};
     PrintWriter pen = new PrintWriter(System.out, true);
     AsciiBlock art = new Rect('^', 80, 24);
-    AsciiBlock art2 = new PatternBorder(new PatternBorder(
-        new HComp(VAlignment.CENTER, new AsciiBlock[] {new Surrounded(new PatternBorder(
-            new VComp(HAlignment.CENTER, new AsciiBlock[] {
-                new Line(" ________  ________  ________  _______   ________      "),
-                new Line("|\\   __  \\|\\   __  \\|\\   ___ \\|\\  ___ \\ |\\   ___  \\    "),
-                new Line(
-                    "\\ \\  \\|\\  \\ \\  \\|\\  \\ \\  \\_|\\ \\ \\   __/|\\ \\  \\\\ \\  \\   "),
-                new Line(
-                    " \\ \\   ____\\ \\   __  \\ \\  \\ \\\\ \\ \\  \\_|/_\\ \\  \\\\ \\  \\  "),
-                new Line(
-                    "  \\ \\  \\___|\\ \\  \\ \\  \\ \\  \\_\\\\ \\ \\  \\_|\\ \\ \\  \\\\ \\  \\ "),
-                new Line(
-                    "   \\ \\__\\    \\ \\__\\ \\__\\ \\_______\\ \\_______\\ \\__\\\\ \\__\\"),
-                new Line("    \\|__|     \\|__|\\|__|\\|_______|\\|_______|\\|__| \\|__|"),}),
-            new char[] {'H', 'O', 'U', 'C', 'K'}), ' ')}),
-        new char[] {'@', '#', '$', '%', '&', '*'}), new char[] {'@', '#', '$', '%', '&', '*'});
+    AsciiBlock art2 = new HComp(VAlignment.CENTER, new AsciiBlock[] {new Rect(' ', 3, 1),
+        new Surrounded(new PatternBorder(new VComp(HAlignment.CENTER, new AsciiBlock[] {
+            new Line("|\\   __  \\|\\   __  \\|\\   ___ \\|\\  ___ \\  |\\   ___  \\    "),
+            new Line("\\ \\  \\|\\  \\ \\  \\|\\  \\ \\  \\_|\\ \\ \\   __/|\\  \\  \\\\ \\  \\   "),
+            new Line(" \\ \\   ____\\ \\   __  \\ \\  \\ \\\\ \\ \\  \\_|/_\\  \\  \\\\ \\  \\  "),
+            new Line(
+                "  \\ \\  \\___|\\ \\  \\ \\  \\ \\  \\_\\\\ \\ \\  \\_|\\ \\  \\  \\\\ \\  \\ "),
+            new Line("   \\ \\__\\    \\ \\__\\ \\__\\ \\_______\\ \\_______\\  \\__\\\\ \\__\\"),
+            new Line("    \\|__|     \\|__|\\|__|\\|_______|\\|_______| \\|__| \\|__|"),}),
+            new char[] {'H', 'O', 'U', 'C', 'K'}), ' '),
+        new Rect(' ', 3, 1)});
+    for (int z = 0; z < 7; z++) {
+      art2 = new PatternBorder(art2, pseudos[(int) Math.floor(Math.random() * pseudos.length)]);
+    }
     AsciiBlock.print(pen, art);
     AsciiBlock.print(pen, art2);
     pen.close();
