@@ -1093,6 +1093,14 @@ public class TestBlockEquiv {
   } // proveexesRectVsRectSamebroken
 
   /**
+   * Rectangles vs rectangles that should be the same.
+   */
+  @Test
+  public void proveexesRectVsRectSamebroken2() {
+    exesCompareSame(exesRectsA, exesRectsA, "Rect");
+  } // proveexesRectVsRectSamebroken2
+
+  /**
    * Rectangles vs rectangles that should be different.
    */
   @Test
