@@ -71,7 +71,35 @@ public class HComp implements AsciiBlock {
    *   if i is outside the range of valid rows.
    */
   public String row(int i) throws Exception {
-    return "";  // STUB
+    if ((i >= 0) && (i <= this.height())) {
+      // Stuff within the box
+      String constructedString = "";
+      for (AsciiBlock block: this.blocks) {
+        int iOffset = i;
+        switch (this.align) {
+          case TOP:
+            
+            break;
+          case BOTTOM:
+            iOffset = iOffset - (this.height() - block.height());
+            break;
+          case CENTER:
+            iOffset = iOffset - ((this.height() - block.height()) / 2);
+            break;
+          default:
+            break;
+        }
+        if ((iOffset >= 0) && (iOffset < block.height())) {
+          constructedString = constructedString + block.row(iOffset);
+        } else {
+          constructedString = constructedString +  " ".repeat(block.width());
+        }
+      }
+
+      return constructedString;
+    } else {
+      throw new Exception("Invalid row " + i);
+    } // if/else
   } // row(int)
 
   /**
@@ -80,7 +108,11 @@ public class HComp implements AsciiBlock {
    * @return the number of rows
    */
   public int height() {
-    return 0;   // STUB
+    int maxHeight = 0;
+    for (AsciiBlock block: this.blocks) {
+      maxHeight = Math.max(maxHeight, block.height());
+    }
+    return maxHeight;
   } // height()
 
   /**
@@ -89,7 +121,11 @@ public class HComp implements AsciiBlock {
    * @return the number of columns
    */
   public int width() {
-    return 0;   // STUB
+    int totalWidth = 0;
+    for (AsciiBlock block: this.blocks) {
+      totalWidth = totalWidth + block.width();
+    }
+    return totalWidth;
   } // width()
 
   /**

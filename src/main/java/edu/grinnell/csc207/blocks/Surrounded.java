@@ -54,10 +54,6 @@ public class Surrounded implements AsciiBlock {
    *   If the row is invalid.
    */
   public String row(int i) throws Exception {
-    if ((i < 0) || (i >= this.height())) {
-      throw new Exception("Invalid row " + i);
-    } // if
-
     if (i == 0 || i == this.height() - 1) {
       // The top of the box
       return this.surroundChar.repeat(this.contents.width() + 2);

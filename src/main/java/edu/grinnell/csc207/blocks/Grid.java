@@ -62,10 +62,6 @@ public class Grid implements AsciiBlock {
    *   If the row is invalid.
    */
   public String row(int i) throws Exception {
-    if ((i < 0) || (i >= this.height())) {
-      throw new Exception("Invalid row " + i);
-    } // if
-
     if ((i >= 0) && (i <= this.height())) {
       // Stuff within the box
       String constructedString = "";
