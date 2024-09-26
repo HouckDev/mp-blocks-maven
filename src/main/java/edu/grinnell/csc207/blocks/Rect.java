@@ -98,7 +98,9 @@ public class Rect implements AsciiBlock {
    *    false otherwise.
    */
   public boolean eqv(AsciiBlock other) {
-    return false;       // STUB
+    if (!(other instanceof Rect)) {return false;}
+    if (((Rect) other).row.equals(this.row)) {return true;};
+    return false;
   } // eqv(AsciiBlock)
 
   // +---------------+-----------------------------------------------
