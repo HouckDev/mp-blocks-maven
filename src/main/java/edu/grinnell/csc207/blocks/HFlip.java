@@ -45,7 +45,16 @@ public class HFlip implements AsciiBlock {
    *   If the row is invalid.
    */
   public String row(int i) throws Exception {
-    throw new Exception("Not yet implemented"); // STUB
+    if ((i >= 0) && (i < this.height())) {
+      // Stuff within the box
+      String constructedString = "";
+      for (int z = 0; z < this.block.row(i).length(); z++) {
+        constructedString = this.block.row(i).charAt(z) + constructedString;
+      }
+      return constructedString;
+    } else {
+      throw new Exception("Invalid row " + i);
+    } // if/else
   } // row(int)
 
   /**
@@ -54,7 +63,7 @@ public class HFlip implements AsciiBlock {
    * @return the number of rows
    */
   public int height() {
-    return 0;   // STUB
+    return this.block.height();
   } // height()
 
   /**
@@ -63,7 +72,7 @@ public class HFlip implements AsciiBlock {
    * @return the number of columns
    */
   public int width() {
-    return 0;   // STUB
+    return this.block.width();
   } // width()
 
   /**
