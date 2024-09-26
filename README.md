@@ -7,6 +7,10 @@ Explorations with the creation, composition, and mutation of blocks of ASCII tex
 * Samuel A. Rebelsky (starter code).
 * Paden Houck
 
+**Attributions**
+
+* https://ascii.today/ (For Generating ASCII text used in art, '3D - Ascii' font)
+
 **Notes for the reader**
 
 Project containing classes for AsciiBlocks to created nested depictions in Ascii text
