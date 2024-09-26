@@ -3,10 +3,9 @@ package edu.grinnell.csc207.blocks;
 /**
  * A text block surrounded by a single letter.
  *
- * @author Samuel A. Rebelsky
  * @author Paden Houck
  */
-public class Surrounded implements AsciiBlock {
+public class PatternBorder implements AsciiBlock {
   // +--------+------------------------------------------------------------
   // | Fields |
   // +--------+
@@ -34,7 +33,7 @@ public class Surrounded implements AsciiBlock {
    * @param theChar
    *   The character that we use to surround the block.
    */
-  public Surrounded(AsciiBlock blockContents, char theChar) {
+  public PatternBorder(AsciiBlock blockContents, char theChar) {
     this.contents = blockContents;
     this.surroundChar = Character.toString(theChar);
   } // Surrounded(AsciiBlock)
