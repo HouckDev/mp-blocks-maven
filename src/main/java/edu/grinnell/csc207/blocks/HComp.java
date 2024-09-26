@@ -81,13 +81,13 @@ public class HComp implements AsciiBlock {
             break;
           default:
             break;
-        }
+        } // switch
         if ((iOffset >= 0) && (iOffset < block.height())) {
           constructedString = constructedString + block.row(iOffset);
         } else {
           constructedString = constructedString + " ".repeat(block.width());
-        }
-      }
+        } // if else
+      } // for
 
       return constructedString;
     } else {
@@ -104,7 +104,7 @@ public class HComp implements AsciiBlock {
     int maxHeight = 0;
     for (AsciiBlock block : this.blocks) {
       maxHeight = Math.max(maxHeight, block.height());
-    }
+    } // for
     return maxHeight;
   } // height()
 
@@ -117,7 +117,7 @@ public class HComp implements AsciiBlock {
     int totalWidth = 0;
     for (AsciiBlock block : this.blocks) {
       totalWidth = totalWidth + block.width();
-    }
+    } // for
     return totalWidth;
   } // width()
 
