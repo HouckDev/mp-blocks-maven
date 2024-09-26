@@ -15,7 +15,7 @@ import edu.grinnell.csc207.blocks.Trimmed;
 import edu.grinnell.csc207.blocks.VAlignment;
 import edu.grinnell.csc207.blocks.VComp;
 import edu.grinnell.csc207.blocks.VFlip;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -1079,6 +1079,19 @@ public class TestBlockEquiv {
   public void exesRectVsRectSame() {
     exesCompareSame(exesRectsA, exesRectsB, "Rect");
   } // exesRectvsRectSame
+  
+  /**
+   * @Author Paden Houck
+   * Rectangles vs rectangles that should be the same. Indication that exesRectVsRectSame may be broken.
+   */
+  @Test
+  public void proveexesRectVsRectSamebroken() throws Exception {
+    assertTrue(new Rect(' ', 4, 6).eqv(new Rect(' ', 4, 6)), "Rect Test");
+    assertTrue(new Rect('X', 4, 6).eqv(new Rect('X', 4, 6)), "Rect Test");
+    assertFalse(new Rect('X', 3, 6).eqv(new Rect('X', 4, 6)), "Rect Test");
+    assertFalse(new Rect('Y', 4, 6).eqv(new Rect('X', 4, 6)), "Rect Test");
+  } // proveexesRectVsRectSamebroken
+
   /**
    * Rectangles vs rectangles that should be different.
    */
