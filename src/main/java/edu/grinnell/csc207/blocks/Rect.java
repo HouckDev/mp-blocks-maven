@@ -102,7 +102,7 @@ public class Rect implements AsciiBlock {
   } // eqv(AsciiBlock)
 
   /**
-   * Determine if another Boxed is structurally equivalent to this block.
+   * Determine if another Rect is structurally equivalent to this block.
    *
    * @param other
    *   The block to compare to this block.
@@ -111,8 +111,8 @@ public class Rect implements AsciiBlock {
    *     false otherwise.
    */
   public boolean eqv(Rect other) {
-    return this.row.equals(other.row) && this.height() == other.height() && this.width() == other.width();
-  } // eqv(Line)
+    return this.row.equals(other.row) && this.height == other.height;
+  } // eqv(Rect)
 
   // +---------------+-----------------------------------------------
   // | Other methods |
